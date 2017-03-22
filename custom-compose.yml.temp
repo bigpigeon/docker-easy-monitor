@@ -1,0 +1,8 @@
+version: '3'
+services:
+  grafana:
+    environment:
+      # 修改为服务器地址
+      - GF_SERVER_ROOT_URL=http://your-server-name
+      # 修改为自己的密码
+      - GF_SECURITY_ADMIN_PASSWORD=secret
