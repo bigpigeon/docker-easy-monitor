@@ -9,39 +9,39 @@
 数据库用的是influxdb，用来收集日志非常好用，在插入时就自动带上时间轴
 
 
-### Get Start
+### 开始
 
-**requirment**
+**前置条件**
 
-安装最新版的docker和docker-compose
+- 安装最新版的docker和docker-compose
 
 
-root环境或者root下执行docker的环境
+- root环境或者root下执行docker的环境
 
 
 **安装**
 
-进入项目根目录
+1. 进入项目根目录
 
     cd docker-easy-monitor
 
-复制custom-compose.yml.temp到custom-compose.yaml并修改其中的环境变量
+2. 复制custom-compose.yml.temp到custom-compose.yaml并修改其中的环境变量
 
     cp custom-compose.yml.temp custom-compose.yaml
 
-进入项目根目录,执行以下脚本拉取镜像
+3. 进入项目根目录,执行以下脚本拉取镜像
 
     ./boot.sh pull
 
-导入grafana的配置文件(可以跳过)，放入项目根目录下grafana中(以后考虑做成app的形式)
+4. (可以跳过)导入grafana的配置文件，放入项目根目录下grafana中(以后考虑做成app的形式)
 
     scp -r ftp@you-archive-server:/your/grafana/dir grafana
 
-启动项目
+5. 启动项目
 
     ./boot.sh up -d
 
-在浏览器访问grafana，并用帐号名**admin**刚才设置的密码环境变量**GF_SECURITY_ADMIN_PASSWORD**登录,
+6. 在浏览器访问grafana，并用帐号名**admin**刚才设置的密码环境变量**GF_SECURITY_ADMIN_PASSWORD**登录,
 
     http://your-server-name:3000
 
