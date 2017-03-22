@@ -23,23 +23,23 @@
 
 1. 进入项目根目录
 
-    cd docker-easy-monitor
+        cd docker-easy-monitor
 
 2. 复制custom-compose.yml.temp到custom-compose.yaml并修改其中的环境变量
 
-    cp custom-compose.yml.temp custom-compose.yaml
+        cp custom-compose.yml.temp custom-compose.yaml
 
 3. 进入项目根目录,执行以下脚本拉取镜像
 
-    ./boot.sh pull
+        ./boot.sh pull
 
 4. (可以跳过)导入grafana的配置文件，放入项目根目录下grafana中(以后考虑做成app的形式)
 
-    scp -r ftp@you-archive-server:/your/grafana/dir grafana
+        scp -r ftp@you-archive-server:/your/grafana/dir grafana
 
 5. 启动项目
 
-    ./boot.sh up -d
+        ./boot.sh up -d
 
 6. 在浏览器访问grafana，并用帐号名**admin**刚才设置的密码环境变量**GF_SECURITY_ADMIN_PASSWORD**登录,
 
