@@ -136,9 +136,37 @@ error fatal=true
 # string value
 event msg="logged out"
 
-# multiple values
-cpu load=10,alert=true,reason="value above maximum threshold"
 ```
+
+
+### influxdb安全验证
+
+1. 在influxdb配置中auth-enabled置为true
+
+    vim influxdb/influxdb.conf
+
+```
+[http]
+  enabled = true
+  bind-address = ":8086"
+  auth-enabled = true
+  ...
+```
+
+2. 重启influx
+
+    ./boot.sh restart influx
+
+2. 进入influx cli创建一个admin用户
+
+    ./boot.sh exec influx influx
+    CREATE USER admin WITH PASSWORD 'mysecret' WITH ALL PRIVILEGES
+
+3. 使用curl查看数据库信息
+
+    curl -i -G http://localhost:8086/query -u admin:mysecret --data-urlencode "q=SHOW DATABASES"
+
+
 
 
 ### 备份
@@ -150,3 +178,13 @@ grafana的配置存放位置
 influxdb的数据存放位置
 
     sudo docker volume inspect -f "{{ .Mountpoint }}" monitor_influx-storage
+
+### 关于
+
+[influxdb文档](https://docs.influxdata.com/influxdb/v1.2)
+
+
+[grafana文档](https://grafana.com/)
+
+
+[docker一键安装](https://get.docker.com/)
