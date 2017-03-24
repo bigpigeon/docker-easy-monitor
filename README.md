@@ -153,16 +153,24 @@ event msg="logged out"
   ...
 ```
 
-2. 重启influx
-
-    ./boot.sh restart influx
-
 2. 进入influx cli创建一个admin用户
 
     ./boot.sh exec influx influx
     CREATE USER admin WITH PASSWORD 'mysecret' WITH ALL PRIVILEGES
 
-3. 使用curl查看数据库信息
+3. 在custom-compose配置中修改influx的port配置，允许外部访问influx的8086接口
+
+```
+influx:
+  ports:
+    - 8086:8086
+```
+
+2. 删除旧的docker并重新生成所有服务(influx和grafana的数据都保存在volume里，所以不用当心被删掉)
+
+    ./boot.sh stop && ./boot.sh rm -f && ./boot.sh up -d
+
+5. 使用curl查看数据库信息
 
     curl -i -G http://localhost:8086/query -u admin:mysecret --data-urlencode "q=SHOW DATABASES"
 

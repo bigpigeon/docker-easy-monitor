@@ -18,13 +18,11 @@ services:
    volumes:
     - ./influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
     - influx-storage:/var/lib/influxdb
-   ports:
-    - 127.0.0.1:8086:8086
    command: -config /etc/influxdb/influxdb.conf
   busybox:
    image: busybox
    volumes:
-     - ./grafana:/var/lib/grafana
+    - ./grafana:/var/lib/grafana
 
 volumes:
   influx-storage:

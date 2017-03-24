@@ -6,3 +6,7 @@ services:
       - GF_SERVER_ROOT_URL=http://your-server-name
       # 修改为自己的密码
       - GF_SECURITY_ADMIN_PASSWORD=secret
+  influx:
+    ports:
+      - 127.0.0.1:8086:8086
+      #- 8086:8086
