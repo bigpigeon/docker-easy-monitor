@@ -10,13 +10,14 @@ services:
     - GF_SERVER_ROOT_URL=http://grafana.server.name
     - GF_SECURITY_ADMIN_PASSWORD=secret
    volumes:
+    - ./conf/grafana.ini:/etc/grafana/grafana.ini
     - ./grafana:/var/lib/grafana
    depends_on:
      - busybox
   influx:
    image: influxdb
    volumes:
-    - ./influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+    - ./conf/influxdb.conf:/etc/influxdb/influxdb.conf:ro
     - influx-storage:/var/lib/influxdb
    command: -config /etc/influxdb/influxdb.conf
   busybox:
