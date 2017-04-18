@@ -155,8 +155,10 @@ event msg="logged out"
 
 2. 进入influx cli创建一个admin用户
 
-    ./boot.sh exec influx influx
-    CREATE USER admin WITH PASSWORD 'mysecret' WITH ALL PRIVILEGES
+```
+./boot.sh exec influx influx
+CREATE USER admin WITH PASSWORD 'mysecret' WITH ALL PRIVILEGES
+```
 
 3. 在custom-compose配置中修改influx的port配置，允许外部访问influx的8086接口
 
