@@ -141,11 +141,15 @@ event msg="logged out"
 
 ### influxdb安全验证
 
-1. 在influxdb配置中auth-enabled置为true
+1. 切换到need_auth分支,可以看到http.auth-enabled和admin.enabled都设为true
 
-    vim influxdb/influxdb.conf
+    vim conf/influxdb.conf
 
 ```
+[admin]
+  enabled = true
+  ...
+ 
 [http]
   enabled = true
   bind-address = ":8086"
@@ -160,12 +164,13 @@ event msg="logged out"
 CREATE USER admin WITH PASSWORD 'mysecret' WITH ALL PRIVILEGES
 ```
 
-3. 在custom-compose配置中修改influx的port配置，允许外部访问influx的8086接口
+3. 在custom-compose配置中修改influx的port配置，允许外部访问influx的8086和8083接口
 
 ```
 influx:
   ports:
     - 8086:8086
+    - 8083:8083
 ```
 
 2. 删除旧的docker并重新生成所有服务(influx和grafana的数据都保存在volume里，所以不用当心被删掉)
@@ -176,7 +181,19 @@ influx:
 
     curl -i -G http://localhost:8086/query -u admin:mysecret --data-urlencode "q=SHOW DATABASES"
 
+6. 在浏览器打开http://localhost:8083 可以看到influx的管理后台界面，在设置中配置帐号密码即可访问
 
+### 配置邮件告警
+
+1. 复制custom-compose.yml.temp时把邮件的基本信息都填上
+
+2. 保证GF_SERVER_ROOT_URL是一个指向可访问的grafana地址
+
+3. 在grafana后台查看servers setting中的信息是否正确
+
+4. 在dashboard中配置告警规则
+
+PS: 如果想自定义邮件模板可以在custom-compose.yml中为grafana增加EMAILS_TEMPLATES_PATTERN环境变量，让它指向一个自定义的模板文件夹，模板变量内容可以翻看源码
 
 
 ### 备份
