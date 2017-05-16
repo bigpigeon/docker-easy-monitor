@@ -6,7 +6,18 @@ services:
       - GF_SERVER_ROOT_URL=http://your-server-name
       # 修改为自己的密码
       - GF_SECURITY_ADMIN_PASSWORD=secret
+      # 邮件监控信息
+      - GF_SMTP_ENABLE=
+      # smtp服务器的地址
+      - GF_SMTP_HOST=
+      # SMTP用户名
+      - GF_SMTP_USER=
+      # smtp密码
+      - GF_SMTP_PASSWORD=
+      # smtp来自邮件,就是显示的发件人
+      - GF_SMTP_FROM_ADDRESS=
   influx:
     ports:
       - 127.0.0.1:8086:8086
       #- 8086:8086
+      #- 8083:8083
