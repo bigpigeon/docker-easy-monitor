@@ -10,7 +10,6 @@ services:
     - GF_SERVER_ROOT_URL=http://grafana.server.name
     - GF_SECURITY_ADMIN_PASSWORD=secret
    volumes:
-    - ./conf/grafana.ini:/etc/grafana/grafana.ini
     - ./grafana:/var/lib/grafana
    depends_on:
      - busybox
