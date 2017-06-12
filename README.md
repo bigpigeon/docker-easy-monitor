@@ -173,7 +173,7 @@ influx:
     - 8083:8083
 ```
 
-2. 删除旧的docker并重新生成所有服务(influx和grafana的数据都保存在volume里，所以不用当心被删掉)
+4. 删除旧的docker并重新生成所有服务(influx和grafana的数据都保存在volume里，所以不用当心被删掉)
 
     ./boot.sh stop && ./boot.sh rm -f && ./boot.sh up -d
 
